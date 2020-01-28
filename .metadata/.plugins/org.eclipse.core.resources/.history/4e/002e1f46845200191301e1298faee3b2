@@ -1,0 +1,113 @@
+package Vista;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+
+public class CitaGUI extends JPanel {
+Font font;
+ComponentCustomization custom;
+	/**
+	 * Create the panel.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 */
+	public CitaGUI() throws FontFormatException, IOException {
+		/* Customizacion de Panel Principal*/
+		setBackground(Color.WHITE);
+		setBounds(0, 0, 1051,500 );
+		/* Implementacion de Labels */
+		setLayout(null);
+		
+		// Creacion de Label Numero de Cita
+		JLabel lblnumcita = new JLabel("No. Cita.: 548484");
+		lblnumcita.setBounds(0, 30, 116, 20);
+		custom.customLabel(lblnumcita, "No.Cita.: 5454845");
+
+	
+		// Creacion de Label idPaciente
+		JLabel lblidPaciente = new JLabel("Id Paciente");
+		lblidPaciente.setBounds(10, 97, 54, 14);
+		custom.customLabel(lblidPaciente, "Id Paciente");
+
+		// Label  Paciente
+		JLabel lblPaciente = new JLabel("Nombre Paciente");
+		lblPaciente.setBounds(256, 97, 105, 14);
+		custom.customLabel(lblPaciente, "Nombre del Paciente");
+		// Label Nombre Paciente
+		JLabel lblNombre = new JLabel("Carlos Caraballo Gomez");
+		lblNombre.setBounds(256, 130, 303, 14);
+		custom.customLabel(lblNombre, "Carlos Caraballo Gomez");
+		
+		// TextField de idPaciente
+		JFormattedTextField txtidPaciente = new JFormattedTextField("545");
+		txtidPaciente.setBounds(10, 122, 79, 26);
+		custom.customTXT(txtidPaciente);
+
+		// Boton Buscar Paciente
+		JButton btnSearch = new JButton();
+		btnSearch.setBounds(99, 126, 89, 23);
+		custom.customButton(btnSearch, "Buscar", "\uf002", "solid",2);
+		btnSearch.setBackground(new Color(255, 106, 106));
+		// Insertar al Panel Principal
+		add(lblnumcita);
+		add(lblidPaciente);
+		add(lblPaciente);
+		add(txtidPaciente);
+		add(btnSearch);
+		add(lblNombre);
+		
+		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha.setBounds(10, 199, 46, 14);
+		add(lblFecha);
+		
+		JLabel label = new JLabel("New label");
+		label.setBounds(256, 199, 46, 14);
+		add(label);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(10, 224, 129, 20);
+		add(formattedTextField);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(256, 224, 144, 20);
+		add(comboBox);
+		
+		JLabel lblHora = new JLabel("Hora");
+		lblHora.setBounds(10, 294, 46, 14);
+		add(lblHora);
+		
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setBounds(10, 325, 129, 20);
+		add(formattedTextField_1);
+		
+		JButton button = new JButton("New button");
+		button.setBounds(256, 324, 89, 23);
+		add(button);
+
+		
+
+		
+		
+		
+		
+	}
+
+}

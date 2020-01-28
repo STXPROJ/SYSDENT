@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\fredd\Programs\Java SE\swing-jtable-row-filter-example\table-row-filter"/>
+		<item value="C:\Users\fredd\Desktop\FREDDY-ITLA\C-03-18\Programacion 1\GuiProject"/>
+		<item value="C:\Users\fredd\Desktop\FREDDY-ITLA\C-03-18\Programacion 1\PracticaParcial"/>
+		<item value="C:\Users\fredd\Desktop\FREDDY-ITLA\C-03-18\Programacion 1\ClubVJ"/>
+		<item value="C:\Users\fredd\Desktop\FREDDY-ITLA\C-03-18\Programacion 1\CitasMedicas"/>
+		<item value="C:\Users\fredd\Desktop\FREDDY-ITLA\C-03-18\Programacion 1\Centralita"/>
+		<item value="C:\Users\fredd\Desktop\Analisis\Sistema Consultorio"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="580" key="DIALOG_HEIGHT"/>
+		<item value="429" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

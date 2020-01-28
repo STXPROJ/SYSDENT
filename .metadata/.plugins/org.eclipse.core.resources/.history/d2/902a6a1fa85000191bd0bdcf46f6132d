@@ -1,0 +1,75 @@
+
+package Modelo.VO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+
+public class PacienteVO extends Persona {
+private Date FechaNac;
+private String EstadoCivil;
+private String Ocupacion;
+private String Telefono;
+@Override
+public String getTelefono() {
+	// TODO Auto-generated method stub
+	return super.getTelefono();
+}
+@Override
+public void setTelefono(String telefono) {
+	// TODO Auto-generated method stub
+	super.setTelefono(telefono);
+}
+@Override
+public String getNombre() {
+	// TODO Auto-generated method stub
+	return super.getNombre();
+}
+@Override
+public void setNombre(String nombre) {
+	// TODO Auto-generated method stub
+	super.setNombre(nombre);
+}
+@Override
+public String getSexo() {
+	// TODO Auto-generated method stub
+	return super.getSexo();
+}
+@Override
+public void setSexo(String sexo) {
+	// TODO Auto-generated method stub
+	super.setSexo(sexo);
+}
+@Override
+public Date getFechaIngreso() {
+	// TODO Auto-generated method stub
+	return super.getFechaIngreso();
+}
+@Override
+public void setFechaIngreso(Date fechaIngreso) {
+	// TODO Auto-generated method stub
+	super.setFechaIngreso(fechaIngreso);
+}
+public Date getFechaNac() {
+	return FechaNac;
+}
+public void setFechaNac(Date fechaNac) {
+	FechaNac = fechaNac;
+}
+public String getEstadoCivil() {
+	return EstadoCivil;
+}
+public void setEstadoCivil(String estadoCivil) {
+	EstadoCivil = estadoCivil;
+}
+public String getOcupacion() {
+	return Ocupacion;
+}
+public void setOcupacion(String ocupacion) {
+	Ocupacion = ocupacion;
+}
+
+
+
+}
+

@@ -1,0 +1,41 @@
+package Modelo.VO;
+
+import java.text.ParseException;
+
+import java.sql.Date;
+public class Persona extends Formato{
+
+private String Nombre;
+private String Sexo;
+private Date FechaIngreso;
+private String Telefono;
+
+// METODOS GETTER Y SETER DE LA CLASE PERSONA QUE EXTENDERA A LA CLASE PACIENTE Y EMPLEADO
+
+public String getTelefono() {
+	return Telefono;
+}
+public void setTelefono(String telefono) {
+	Telefono = telefono;
+}
+public String getNombre() {
+	return Nombre;
+}
+public void setNombre(String nombre) {
+	Nombre = nombre;
+}
+public String getSexo() {
+	return Sexo;
+}
+public void setSexo(String sexo) {
+	Sexo = sexo;
+}
+public Date getFechaIngreso() {
+	return FechaIngreso;
+}
+public void setFechaIngreso(Date fechaIngreso) {
+	FechaIngreso = fechaIngreso;
+}
+
+
+}

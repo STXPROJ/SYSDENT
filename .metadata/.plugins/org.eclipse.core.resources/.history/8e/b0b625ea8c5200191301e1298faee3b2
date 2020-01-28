@@ -1,0 +1,166 @@
+package Vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import com.mysql.cj.jdbc.ha.StandardLoadBalanceExceptionChecker;
+
+import javax.swing.JDesktopPane;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.geom.Line2D;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Frame;
+
+import javax.swing.JInternalFrame;
+import java.awt.Color;
+import javax.swing.JSplitPane;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Insets;
+import java.awt.Dimension;
+import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
+public class Menu extends JFrame {
+	Font font = null;
+	ComponentCustomization custom = new ComponentCustomization();
+	private int count = 0;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu frame = new Menu();
+					frame.setVisible(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 */
+	public Menu() throws FontFormatException, IOException  {
+		pack();
+		setExtendedState(MAXIMIZED_BOTH);
+		JPanel menu = new JPanel();
+		getContentPane().add(menu, BorderLayout.CENTER);
+		menu.setLayout(null);
+		menu.setBounds(0, 0, getContentPane().getWidth(), getContentPane().getHeight());
+		menu.setBackground(Color.black);
+		// Crear Panel del subMenu
+				JPanel subMenu = new JPanel();
+				// Color subMenu
+				Color subMenucolor = new Color(89, 173, 238);
+				subMenu.setBounds(0,0,218,735);
+				subMenu.setBackground(subMenucolor);
+				subMenu.setLayout(new MigLayout("", "[209px]", "[45px][][][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px][37px:37px:37px]"));
+		
+			  // Agregar al Frame Principal
+				menu.add(subMenu);
+				// Crear Imagen o icono y mostrar en pantalla
+				ImageIcon userico = new ImageIcon(getClass().getResource("/user.png"));
+				JLabel ico = new JLabel();
+				ico.setHorizontalAlignment(SwingConstants.CENTER);
+				ico.setIcon(userico);
+				
+				/* Implementacion label usuario */
+				// Label Usuario
+				JLabel user = new JLabel();
+				user.setForeground(Color.WHITE);
+				user.setFont(new Font("Tahoma", Font.BOLD, 18));
+				user.setHorizontalAlignment(SwingConstants.CENTER);
+				user.setVerticalAlignment(SwingConstants.BOTTOM);
+				user.setText("Usuario");
+				// Label line
+				ImageIcon lineico = new ImageIcon(getClass().getResource("/Line.png"));
+				JLabel line = new JLabel();
+				line.setHorizontalAlignment(SwingConstants.CENTER);
+				line.setIcon(lineico);
+				
+				/* Implementacion Botoness*/
+				
+				// Boton Agendar Cita
+				JButton btnAgendaCita = new JButton();
+				custom.button(btnAgendaCita,"Agendar Cita","\uf274","regular",1);
+				// Boton Realizar Diagnostico
+				JButton btnRealizaDiagnostico  = new JButton();
+				custom.button(btnRealizaDiagnostico, "Realizar Diagnostico", "\uf0f1","solid",1);
+				// Boton Generar Presupuesto
+				JButton btnGenerarPresupuesto = new JButton();
+				custom.button(btnGenerarPresupuesto,"Generar Presupuesto","\uf51e","solid",1);
+				// Boton Solicitud Protesis
+				JButton btnSolicitud  = new JButton();
+				custom.button(btnSolicitud, "Solicitud Protesis", "\uf15c","regular",1);
+				// Boton Generar Factura
+				JButton btnFactura = new JButton();
+				custom.button(btnFactura, "Generar Factura", "\uf571", "solid",1);
+				// Boton Realizar Pagos
+				JButton btnPago = new JButton();
+				custom.button(btnPago, "Realizar Pagos", "\uf0d6", "solid",1);
+				// Boton Nuevo Empleado
+				JButton btnEmpleado = new JButton();
+				custom.button(btnEmpleado, "Nuevo Empleado", "\uf234", "solid",1);
+				// Boton Crear Ususario 
+				JButton btnUser = new JButton();
+				custom.button(btnUser,"Crear Usuario","\uf4ff","solid",1);
+				// Boton Nuevo Laboratoroio
+				JButton btnLab = new JButton();
+				custom.button(btnLab, "Nuevo Laboratorio", "\uf66f", "solid",1);
+				// Boton Nuevo Servicio
+				JButton btnServicio = new JButton();
+				custom.button(btnServicio, "Nuevo Servicio", "\uf5c9", "solid",1);
+				// Boton Generar Reportes
+				JButton btnReportes = new JButton();
+				custom.button(btnReportes, "Generar Reportes", "\uf080", "solid",1);
+				// Boton Cuentas
+				 JButton btnCuentas = new JButton();
+				 custom.button(btnCuentas, "Cuentas CC-CP", "\uf570", "solid",1);
+				// Agregar Al Panel Principal;
+						
+				subMenu.add(ico, "cell 0 0,grow,gapafter 50px");
+				subMenu.add(user, "cell 0 1,grow,gapafter 50px");
+				subMenu.add(line, "cell 0 2,gapafter 50px");
+				subMenu.add(btnAgendaCita, "cell 0 4,gapafter 50px");
+				subMenu.add(btnRealizaDiagnostico, "cell 0 5,gapafter 50px");
+				subMenu.add(btnGenerarPresupuesto, "cell 0 6,gapafter 50px");
+				subMenu.add(btnSolicitud, "cell 0 7,gapafter 50px");
+				subMenu.add(btnFactura, "cell 0 8,gapafter 50px");
+				subMenu.add(btnPago, "cell 0 9,gapafter 50px");
+				subMenu.add(btnEmpleado, "cell 0 10,gapafter 50px");
+				subMenu.add(btnUser, "cell 0 11,gapafter 50px");
+				subMenu.add(btnLab, "cell 0 12,gapafter 50px");
+				subMenu.add(btnServicio, "cell 0 13,gapafter 50px");
+				subMenu.add(btnReportes, "cell 0 14,gapafter 50px");
+				subMenu.add(btnCuentas, "cell 0 15,gapafter 50px");
+	
+		}
+	}

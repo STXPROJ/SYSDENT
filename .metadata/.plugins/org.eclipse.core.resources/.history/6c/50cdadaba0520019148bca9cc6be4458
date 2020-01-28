@@ -1,0 +1,129 @@
+package Vista;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+
+public class CitaGUI extends JPanel {
+Font font;
+ComponentCustomization custom = new ComponentCustomization();
+	/**
+	 * Create the panel.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 */
+	public CitaGUI() throws FontFormatException, IOException {
+		/* Customizacion de Panel Principal*/
+		setBackground(Color.WHITE);
+		setBounds(0, 0, 1160,630 );
+		setLayout(null);
+		/* Implementacion de Labels */
+		
+		
+		// Creacion de Label Numero de Cita
+		JLabel lblnumcita = new JLabel("");
+		lblnumcita.setBounds(38, 30, 564, 39);
+		custom.label(lblnumcita, "No.Cita.: 5454845");
+
+		/* Creacion de Labels */
+		// Creacion de Label idPaciente
+		JLabel lblidPaciente = new JLabel("Id Paciente");
+		lblidPaciente.setBounds(38, 97, 564, 39);
+		custom.label(lblidPaciente, "ID de Paciente:");
+		// Label  Paciente
+		JLabel lblPaciente = new JLabel("");
+		lblPaciente.setBounds(608, 97, 542, 39);
+		custom.label(lblPaciente, "Nombre del Paciente:");
+		// Label Nombre Paciente
+		JLabel lblNombre = new JLabel("Carlos Caraballo Gomez De La Rosa");
+		lblNombre.setBounds(608, 147, 532, 39);
+		custom.label(lblNombre, "Carlos Caraballo Gomez");
+		// Label Fecha
+		JLabel lblFecha = new JLabel();
+		lblFecha.setBounds(38, 239, 215, 39);
+		custom.label(lblFecha, "Fecha:");
+		// Label Hora
+		JLabel lblHora = new JLabel();
+		lblHora.setBounds(38, 387, 144, 39);
+		custom.label(lblHora, "Hora:");
+		// Label Estado
+		JLabel  lblEstado = new JLabel();
+		lblEstado.setBounds(608, 239, 532, 39);
+		custom.label(lblEstado, "Estado de Cita:");
+		/* Creacion TextFields */
+		
+		// TextField de idPaciente
+		JFormattedTextField txtidPaciente = new JFormattedTextField("545");
+		txtidPaciente.setBounds(38, 147, 215, 53);
+		custom.txt(txtidPaciente);
+		// TextField de Fecha
+		JFormattedTextField txtFecha = new JFormattedTextField();
+		txtFecha.setText("24/03/19");
+		txtFecha.setBounds(38, 289, 215, 53);
+		custom.txt(txtFecha);
+		// TextField de Hora
+		JFormattedTextField txtHora = new JFormattedTextField();
+		txtHora.setText("12:30 PM");
+		txtHora.setBounds(38, 436, 215, 53);
+		custom.txt(txtHora);
+		// Boton Buscar Paciente
+		JButton btnSearch = new JButton();
+		btnSearch.setBounds(263, 136, 144, 64);
+		custom.button(btnSearch, "Buscar", "\uf002", "solid",2);
+		btnSearch.setBackground(new Color(255, 106, 106));
+		
+		/* Creacion ComboBox & Botones */
+		// ComboBox Estado Cita
+		JComboBox cbbEstado = new JComboBox();
+		cbbEstado.setBounds(618, 281, 144, 20);
+
+		// Boton Agendar Cita
+		JButton btnCita = new JButton("");
+		btnCita.setBounds(608, 324, 144, 23);
+		custom.button(btnCita, "Agendar Cita", "\uf073", "regular", 3);
+		// Boton Limpiar Campos	
+		JButton btnClean = new JButton("");
+		btnClean.setBounds(608, 377, 144, 23);
+		custom.button(btnClean, "Limpiar Campos", "\uf51a", "solid", 4);
+		// Insertar al Panel Principal
+		add(lblnumcita);
+		add(lblidPaciente);
+		add(lblPaciente);
+		add(txtidPaciente);
+		add(btnSearch);
+		add(lblNombre);
+		add(lblFecha);
+		add(lblEstado);
+		add(txtHora);
+		add(txtFecha);
+		add(lblEstado);
+		add(lblHora);
+		add(cbbEstado);	
+		add(btnCita);
+		add(btnClean);
+
+		
+
+		
+		
+		
+		
+	}
+}

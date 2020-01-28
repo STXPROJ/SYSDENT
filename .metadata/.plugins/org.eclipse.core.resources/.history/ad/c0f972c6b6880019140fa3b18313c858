@@ -1,0 +1,65 @@
+package Modelo.DAO;
+
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Conexion.Conexion;
+import Modelo.VO.Detalle_FacturaVO;
+import Modelo.VO.Detalle_PagoVO;
+import Modelo.VO.PagoFacturaVO;
+import Modelo.VO.ServicioVO;
+import Modelo.VO.TipoPagoVO;
+import Modelo.VO.TipoServicioVO;
+
+public class Detalle_PagoDAO {
+	private TipoPagoVO tipoPago;
+	private Detalle_PagoVO detallePago;
+	private CallableStatement cs;
+	private CRUD_DAO selectTop;
+	public void RegistrarDetalleFactura(Detalle_PagoVO detalle) {
+		selectTop = new CRUD_DAO();
+	try {
+		// Preparar el procedimiento antes de ejecutar
+		    cs = Conexion.getConnection().prepareCall("Call insertDetalle_Pagos"
+		    		+ "(?,?,?,?)");
+		    // Ingresar Parametros
+		    System.out.println(selectTop.selectTopID("Pago"));
+		    cs.setInt(1, selectTop.selectTopID("Pago") + 1);
+		    cs.setInt(2, detalle.getTipoPago().getIdTipo());
+		    cs.setString(3, detalle.getDescripcion());
+		    cs.setDouble(4, detalle.getMonto());
+	    // Ejecutar Procedimiento
+		    cs.execute();
+		    cs.close();
+		    }
+		catch (SQLException e) {
+	        e.printStackTrace();
+	    }}
+	public ArrayList<Detalle_PagoVO> listaDetalle(int id) throws SQLException{
+		ArrayList<Detalle_PagoVO> detalles = new ArrayList<Detalle_PagoVO>();
+		// Preparar el procedimiento antes de ejecutar
+	    cs = Conexion.getConnection().prepareCall("Call selectAllDetallePagos(?)");
+	    // Ingresar Parametros
+	    cs.setInt(1, id);
+    // Ejecutar Procedimiento
+	    ResultSet rs = 	 cs.executeQuery();
+		while(rs.next()) {
+			// Datos Tipo de Pago
+			tipoPago = new TipoPagoVO();
+			tipoPago.setIdTipo(rs.getInt(2));
+			tipoPago.setTipo(rs.getString(3));
+			//Datos del PAgo
+			detallePago = new Detalle_PagoVO();
+			detallePago.setDescripcion(rs.getString(4));
+			detallePago.setIdPago(rs.getInt(1));
+			detallePago.setMonto(rs.getDouble(5));
+			detallePago.setTipoPago(tipoPago);
+			detalles.add(detallePago);
+		}
+		rs.close();
+		cs.close();
+	    return detalles;
+	}
+}

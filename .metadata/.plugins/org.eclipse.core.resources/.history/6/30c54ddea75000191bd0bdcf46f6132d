@@ -1,0 +1,37 @@
+package Modelo.VO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+public class Persona {
+static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+private String Nombre;
+private String Sexo;
+private Date FechaIngreso;
+public static SimpleDateFormat getFormato() {
+	return formato;
+}
+public static void setFormato(SimpleDateFormat formato) {
+	Persona.formato = formato;
+}
+public String getNombre() {
+	return Nombre;
+}
+public void setNombre(String nombre) {
+	Nombre = nombre;
+}
+public String getSexo() {
+	return Sexo;
+}
+public void setSexo(String sexo) {
+	Sexo = sexo;
+}
+public Date getFechaIngreso() {
+	return FechaIngreso;
+}
+public void setFechaIngreso(Date fechaIngreso) {
+	FechaIngreso = fechaIngreso;
+}
+
+
+}

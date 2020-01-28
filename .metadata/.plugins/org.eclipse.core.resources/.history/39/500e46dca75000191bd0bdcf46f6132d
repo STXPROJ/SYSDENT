@@ -1,0 +1,64 @@
+package Modelo.VO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+public class EmpleadoVO {
+private String Nombre;
+private String Sexo;
+private Date FechaIngreso;
+private String Cedula;
+private String Cargo;
+private String Direccion;
+private String Telefono;
+private String Correo;
+public String getNombre() {
+	return Nombre;
+}
+public void setNombre(String nombre) {
+	Nombre = nombre;
+}
+public String getSexo() {
+	return Sexo;
+}
+public void setSexo(String sexo) {
+	Sexo = sexo;
+}
+public Date getFechaIngreso() {
+	return FechaIngreso;
+}
+public void setFechaIngreso(Date fechaIngreso) {
+	FechaIngreso = fechaIngreso;
+}
+public String getCedula() {
+	return Cedula;
+}
+public void setCedula(String cedula) {
+	Cedula = cedula;
+}
+public String getCargo() {
+	return Cargo;
+}
+public void setCargo(String cargo) {
+	Cargo = cargo;
+}
+public String getDireccion() {
+	return Direccion;
+}
+public void setDireccion(String direccion) {
+	Direccion = direccion;
+}
+public String getTelefono() {
+	return Telefono;
+}
+public void setTelefono(String telefono) {
+	Telefono = telefono;
+}
+public String getCorreo() {
+	return Correo;
+}
+public void setCorreo(String correo) {
+	Correo = correo;
+}
+
+
+}

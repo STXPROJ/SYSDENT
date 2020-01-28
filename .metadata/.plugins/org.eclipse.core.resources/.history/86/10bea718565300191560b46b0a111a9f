@@ -1,0 +1,134 @@
+package Vista;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.io.IOException;
+import java.text.ParseException;
+import java.time.Year;
+import java.util.Calendar;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.text.MaskFormatter;
+
+public class ComponentCustomization {
+	Font font;
+	
+	// Metodo para dar estilo al boton
+	public void button(JButton btn,String nombre,String ico,String fontype,int type) throws FontFormatException, IOException {
+		
+		Color buttonColor = null;
+		switch(type){
+			case 1: //Menu
+			buttonColor = new Color(100, 100, 100);
+			fontAwesome(fontype,31f);
+			btn.setBackground(buttonColor);
+			break;
+			case 2: //Session
+			btn.setBackground(buttonColor);
+			fontAwesome(fontype,41f);
+			buttonColor = new Color(100, 100, 100);
+			break;
+			case 3: //Agregar
+			buttonColor = new Color(61, 204, 45);
+			btn.setBackground(buttonColor);
+			fontAwesome(fontype,45f);
+			break;
+			case 4: // Limpiar
+			buttonColor = new Color(89, 173, 238);
+			btn.setBackground(buttonColor);
+			fontAwesome(fontype,45f);
+			break;
+			case 5: // Buscar
+			buttonColor = new Color(255, 106, 106);
+			btn.setBackground(buttonColor);
+			fontAwesome(fontype, 45f);
+			break;
+		}
+		btn.setBorder(new LineBorder(Color.WHITE,5));
+		btn.setForeground(Color.WHITE);
+		btn.setFont(font);
+		btn.setText(nombre + " " +ico + " ");
+		btn.setHorizontalAlignment(SwingConstants.CENTER);
+		btn.setMargin(new Insets(10, 10, 10, 10));
+
+	}	
+	// Estilo de Label
+		public void label(JLabel label,String nombre,int type) {
+			switch(type) {
+			case 1: // Label Negro Sin Fondo
+				label.setBackground(null);
+				label.setOpaque(false);
+				break;
+			case 2: // Label Fondo Gris
+				label.setOpaque(true);
+				label.setBackground(new Color(197, 197, 197));
+				break;
+			}
+			label.setBackground(new Color(197, 197, 197));
+			label.setText(nombre);
+			label.setForeground(Color.BLACK);
+			label.setFont(new Font("LucidaBright", Font.PLAIN, 35));
+			label.setBounds(label.getX(), label.getY(), label.getWidth(), label.getHeight());
+			
+		}
+		// Estilo de TextField
+		public void txt(JFormattedTextField txt) throws ParseException {
+			 
+			txt.setForeground(Color.BLACK);
+			txt.setFont(new Font("LucidaBright", Font.PLAIN, 35));
+			
+		}
+	
+		// Estilo ComboBox
+		public void cbb(JComboBox cbb,String text) {
+			cbb.setBackground(new Color(100,100,100));
+			cbb.setForeground(Color.BLACK);
+			cbb.setFont(new Font("LucidaBright",Font.PLAIN,25));
+			cbb.getEditor().setItem(text);
+		}
+		// Estilo Spinner
+		public void spinner(JSpinner spinner) {
+			SpinnerDateModel model = new SpinnerDateModel();
+			model.setCalendarField(Calendar.MINUTE);
+			spinner.setModel(model);
+			spinner.setEditor(new JSpinner.DateEditor(spinner, "h:mm a"));
+			spinner.setForeground(Color.BLACK);
+			spinner.setFont(new Font("LucidaBright", Font.PLAIN, 35));
+		}
+		
+		public MaskFormatter formato(String tipo) throws ParseException {
+			MaskFormatter formato = new MaskFormatter();
+			switch(tipo) {
+			case "fecha":
+				int year=Year.now().getValue() % 100;
+				formato = new MaskFormatter("##/##/"+year);
+				break;
+			}
+			return formato;
+		}
+			// metodo para agregar icono a boton
+			public void fontAwesome(String fontype,float size) throws FontFormatException, IOException {
+				if (fontype == "regular"){
+				font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/Font Awesome 5 Free-Regular-400.otf"));
+			    font = font.deriveFont(Font.BOLD,size);}
+				else if (fontype == "solid"){
+				font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/Font Awesome 5 Free-Solid-900.otf"));
+				font = font.deriveFont(Font.BOLD,size);
+				}		
+				
+			    GraphicsEnvironment ge = 
+			        GraphicsEnvironment.getLocalGraphicsEnvironment();
+			    ge.registerFont(font);
+
+		}
+			
+}

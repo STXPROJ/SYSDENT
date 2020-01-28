@@ -1,0 +1,84 @@
+package Modelo.VO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+public class EmpleadoVO extends Persona {
+private String Cedula;
+private String Cargo;
+private String Direccion;
+private String Correo;
+
+// METODOS EXTENDIDOS DE LA CLASE PERSONA
+
+@Override
+public String getTelefono() {
+	// TODO Auto-generated method stub
+	return super.getTelefono();
+}
+@Override
+public void setTelefono(String telefono) {
+	// TODO Auto-generated method stub
+	super.setTelefono(telefono);
+}
+@Override
+public String getNombre() {
+	// TODO Auto-generated method stub
+	return super.getNombre();
+}
+@Override
+public void setNombre(String nombre) {
+	// TODO Auto-generated method stub
+	super.setNombre(nombre);
+}
+@Override
+public String getSexo() {
+	// TODO Auto-generated method stub
+	return super.getSexo();
+}
+@Override
+public void setSexo(String sexo) {
+	// TODO Auto-generated method stub
+	super.setSexo(sexo);
+}
+@Override
+public Date getFechaIngreso() {
+	// TODO Auto-generated method stub
+	return super.getFechaIngreso();
+}
+@Override
+public void setFechaIngreso(Date fechaIngreso) {
+	// TODO Auto-generated method stub
+	super.setFechaIngreso(fechaIngreso);
+}
+
+// METODOS GETTER Y SETTER DE ATRIBUTOS EXTRAS DE EMPLEADO VO
+public String getCedula() {
+	return Cedula;
+}
+public void setCedula(String cedula) {
+	Cedula = cedula;
+}
+public String getCargo() {
+	return Cargo;
+}
+public void setCargo(String cargo) {
+	Cargo = cargo;
+}
+public String getDireccion() {
+	return Direccion;
+}
+public void setDireccion(String direccion) {
+	Direccion = direccion;
+}
+public String getCorreo() {
+	return Correo;
+}
+public void setCorreo(String correo) {
+	Correo = correo;
+}
+
+
+
+
+
+}

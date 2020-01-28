@@ -1,0 +1,241 @@
+package Vista;
+
+import java.awt.Color;
+import java.awt.FontFormatException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JFormattedTextField;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+
+import Modelo.Coordinador.CoordinadorEmpleado;
+import Modelo.Logica.LogicaEmpleado;
+import Modelo.VO.CargoVO;
+import Modelo.VO.EmpleadoVO;
+import Modelo.VO.SexoVO;
+
+public class EmpleadoGUI extends JPanel {
+private ComponentCustomization custom = new ComponentCustomization();
+private CoordinadorEmpleado coordEmpleado;
+private LogicaEmpleado logicaEmpleado;
+private EmpleadoVO empleado;
+private ArrayList<CargoVO> listaCargo;
+private ArrayList<SexoVO> listaSexo;
+private CargoVO cargo;
+private SexoVO sexo;
+
+	/**
+	 * Create the panel.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws ParseException 
+	 * @throws SQLException 
+	 */
+	public EmpleadoGUI() throws FontFormatException, IOException, ParseException, SQLException {
+		/* Set Logica y Coordinador */
+		coordEmpleado = new CoordinadorEmpleado();
+		logicaEmpleado = new LogicaEmpleado();
+		coordEmpleado.setLogica(logicaEmpleado);
+		logicaEmpleado.setCoordinador(coordEmpleado);
+		/* Lista de Detalles y Objetos */
+		listaCargo = coordEmpleado.listaCargo();
+		listaSexo = coordEmpleado.listaSexo();
+		/* Customizacion de Panel Principal*/
+		setBackground(Color.WHITE);
+		setBounds(0, 0, 1160,630 );
+		setLayout(null);
+		// Creacion de label Nombres Empleado
+		JLabel lblNombreEmpleado = new JLabel("");
+		lblNombreEmpleado.setBounds(38, 20, 564, 39);
+		custom.label(lblNombreEmpleado, "Nombres:",1);
+		// Creacion de label Apellidos Empleado
+		JLabel lblApellido = new JLabel("");
+		lblApellido.setBounds(400, 20, 564, 39);
+		custom.label(lblApellido, "Apellidos:",1);
+		// label  Fecha
+		JLabel lblFecha = new JLabel("");
+		lblFecha.setBounds(38, 150, 564, 39);
+		custom.label(lblFecha, "Fecha.:",1);
+		// label Correo
+		JLabel lblCorreo = new JLabel();
+		lblCorreo.setBounds(38, 280, 215, 39);
+		custom.label(lblCorreo, "Correo:",1);
+		//label Cedula
+		JLabel lblCedula = new JLabel();
+		lblCedula.setBounds(750,20,532,39);
+		custom.label(lblCedula, "Cedula:", 1);
+		//label Sexo
+		JLabel lblSexo = new JLabel();
+		lblSexo.setBounds(1040,20,532,39);
+		custom.label(lblSexo, "Sexo:", 1);
+		// label Telefono
+		JLabel lblTelefono = new JLabel();
+		lblTelefono.setBounds(400,150,265,39);
+		custom.label(lblTelefono, "Telefono:", 1);
+		// label Cargo
+		JLabel lblCargo = new JLabel();
+		lblCargo.setBounds(750,150,265,39);
+		custom.label(lblCargo, "Cargo:", 1);
+		// label Dirccion
+		JLabel lblDireccion = new JLabel();
+		lblDireccion.setBounds(608,280,265,39);
+		custom.label(lblDireccion, "Direccion:", 1);
+		// label Sueldo
+		JLabel lblSueldo = new JLabel();
+		lblSueldo.setBounds(38,410,265,39);
+		custom.label(lblSueldo, "Sueldo:", 1);
+		
+		
+		/* Creacion TextFields y ComboBox */
+		
+		// TextField de Nombre Empleado
+		JFormattedTextField txtNombreEmpleado = new JFormattedTextField("");
+		txtNombreEmpleado.setBounds(38, 70, 300, 53);
+		custom.txt(txtNombreEmpleado,1);
+		// TextField de Apellido Empleado
+		JFormattedTextField txtApellido = new JFormattedTextField("");
+		txtApellido.setBounds(400, 70, 300, 53);
+		custom.txt(txtApellido,1);
+		// TextField de Fecha
+		JFormattedTextField txtFecha = new JFormattedTextField(custom.formato("fecha"));
+		txtFecha.setBounds(38, 200, 215, 53);
+		custom.txt(txtFecha,1);
+		// TextField de Correo
+		JFormattedTextField txtCorreo = new JFormattedTextField("");
+		txtCorreo.setBounds(38, 330, 525, 53);
+		custom.txt(txtCorreo,1);
+		// TextField de Cedula
+		JFormattedTextField txtCedula = new JFormattedTextField(custom.formato("cedula"));
+		txtCedula.setBounds(750, 70, 250, 53);
+		custom.txt(txtCedula,1);
+		// Combobox de Sexo
+		JComboBox cbbSexo = new JComboBox();
+		custom.cbb(cbbSexo, "Sexo",4);
+		listadoSexo(cbbSexo);
+		cbbSexo.setBounds(1040,70,85,53);
+		// TextField de Telefono
+		JFormattedTextField txtTelefono = new JFormattedTextField(custom.formato("telefono"));
+		txtTelefono.setBounds(400, 200, 300, 53);
+		custom.txt(txtTelefono,1);
+		// Combobox de Cargo
+		JComboBox cbbCargo = new JComboBox();
+		custom.cbb(cbbCargo, "Cargo",5);
+		listadoCargo(cbbCargo);
+		cbbCargo.setBounds(750,200,350,53);
+		// TextField de Sueldo
+		JFormattedTextField txtSueldo = new JFormattedTextField(custom.formato("precio"));
+		txtSueldo.setBounds(38, 460, 350, 53);
+		custom.txt(txtSueldo,1);
+		// Text Area de Direccion
+		JTextArea txtDireccion = new JTextArea();
+		txtDireccion.setBounds(608,330,532,185);
+		custom.txtArea(txtDireccion);
+		
+		
+		/* Creacion de Botones */
+		// Boton Agregar Empleado
+		JButton btnAgregar = new JButton("");
+		btnAgregar.setBounds(38, 525, 242, 74);
+		custom.button(btnAgregar, "Registrar ", "\uf234", "solid", 3);
+		// Boton Limpiar Campos	
+		JButton btnClean = new JButton("");
+		btnClean.setBounds(760, 525, 242, 74);
+		custom.button(btnClean, "Limpiar Campos", "\uf51a", "solid", 4);
+
+		// Boton Descar Empleado
+		JButton btnDescartar = new JButton();
+		btnDescartar.setBounds(400, 525, 255, 74);
+		custom.button(btnDescartar, "Descartar Cambios", "\uf05e", "solid", 6);
+		/* Agregar Componentes */
+		add(lblNombreEmpleado);
+		add(lblApellido);
+		add(lblFecha);
+		add(lblCorreo);
+		add(lblTelefono);
+		add(lblCedula);
+		add(lblSexo);
+		add(lblCargo);
+		add(lblDireccion);
+		add(lblSueldo);
+		add(txtNombreEmpleado);
+		add(txtApellido);
+		add(txtCedula);
+		add(cbbSexo);
+		add(txtFecha);
+		add(txtTelefono);
+		add(cbbCargo);
+		add(txtCorreo);
+		add(txtDireccion);
+		add(txtSueldo);
+		add(btnAgregar);
+		add(btnClean);
+		add(btnDescartar);
+	
+		/* Acciones de Botones */
+		cbbCargo.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (int i =0;i<listaCargo.size();i++) {
+					if (cbbCargo.getSelectedItem().toString().equals(listaCargo.get(i).getNombre())) {
+					cargo = new CargoVO();
+					cargo.setNombre(listaCargo.get(i).getNombre());
+					cargo.setIdCargo(listaCargo.get(i).getIdCargo());					
+					};}	}});
+		cbbSexo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (int i =0;i<listaSexo.size();i++) {
+					if (cbbCargo.getSelectedItem().toString().equals(listaSexo.get(i).getGenero())) {
+					sexo = new SexoVO();
+					sexo.setGenero(listaSexo.get(i).getGenero());
+					sexo.setIdSexo(listaSexo.get(i).getIdSexo());					
+					};}}});
+		btnAgregar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				empleado = new EmpleadoVO();
+				empleado.set
+				
+			}
+		});
+	}
+	/* Llenar ComboBox Doctor*/
+	private void listadoSexo(JComboBox cbb) {
+		 DefaultComboBoxModel model = (DefaultComboBoxModel) cbb.getModel();
+	        // Borrar Datos Viejos
+	        model.removeAllElements();
+	        for (int i=0;i<listaSexo.size();i++) {
+	            model.addElement(listaSexo.get(i).getLetra());
+	        }
+	        // setting model with new data
+	        cbb.setModel(model);
+	        cbb.setRenderer(new MyComboBox("Sexo")); 
+      	cbb.setSelectedIndex(-1); 
+	}
+	private void listadoCargo(JComboBox cbb) {
+		 DefaultComboBoxModel model = (DefaultComboBoxModel) cbb.getModel();
+	        // Borrar Datos Viejos
+	        model.removeAllElements();
+	        for (int i=0;i<listaCargo.size();i++) {
+	            model.addElement(listaCargo.get(i).getNombre());
+	        }
+	        // setting model with new data
+	        cbb.setModel(model);
+	        cbb.setRenderer(new MyComboBox("Cargo")); 
+     	cbb.setSelectedIndex(-1); 
+	}
+	public String title() {
+		String title = "Nuevo Empleado";
+		return title;
+	}
+}

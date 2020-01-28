@@ -1,0 +1,63 @@
+package Modelo.Logica;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import Modelo.Coordinador.CoordinadorServicio;
+import Modelo.DAO.EstadoCivilDAO;
+import Modelo.DAO.ServicioDAO;
+import Modelo.DAO.TipoServicioDAO;
+import Modelo.VO.EstadoCivilVO;
+import Modelo.VO.ServicioVO;
+import Modelo.VO.TipoServicioVO;
+import Vista.ComponentCustomization;
+
+public class LogicaServicio {
+private CoordinadorServicio coordServicio;
+private ComponentCustomization custom = new ComponentCustomization();
+private ValidationClass validation = new ValidationClass();
+private ServicioDAO consultaServicio;
+private TipoServicioDAO consultaTipo;
+public void setCoordinador(CoordinadorServicio coordServicio) {
+	this.coordServicio = coordServicio;
+}
+
+public boolean validarAddServicio(ServicioVO servicio) throws ClassNotFoundException {
+	boolean bool = false;
+	if(servicio.getNombre().isEmpty())
+	{custom.msg("",1);}
+	else
+	{
+		consultaServicio = new ServicioDAO();
+		if (custom.msgConfirm("Desea Registrar este servicio?", 1) ==  JOptionPane.YES_OPTION) {
+		consultaServicio.RegistrarServicio(servicio);
+		bool = true;}
+	}
+	return bool;}
+public ArrayList<ServicioVO> validarListaServicio() throws SQLException{
+	consultaServicio = new ServicioDAO();
+	if(!consultaServicio.listaServicio().isEmpty()) {
+		return consultaServicio.listaServicio();
+	}else {
+		custom.msg("No existen Servicio", 7);
+		return null;
+	}}
+public ArrayList<TipoServicioVO> validarListaTipo() throws SQLException{
+		return consultaTipo.listatipoServicio();
+}
+public boolean validarAddTipo(TipoServicioVO tipo) {
+	boolean bool = false;
+	consultaTipo = new TipoServicioDAO();
+	try {
+	if(tipo.getNombre().isEmpty())
+	{custom.msg("Debe llenar el campo de Nombre",7);}
+	else
+	{consultaTipo.registrartipoServicio(tipo);
+			bool = true;
+		}} catch (Exception e) {
+			e.printStackTrace();
+		}return bool;
+}
+}

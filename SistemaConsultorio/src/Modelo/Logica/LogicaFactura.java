@@ -1,0 +1,140 @@
+package Modelo.Logica;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import Modelo.Coordinador.CoordinadorFactura;
+import Modelo.DAO.CRUD_DAO;
+import Modelo.DAO.Detalle_DiagnosticoDAO;
+import Modelo.DAO.Detalle_FacturaDAO;
+import Modelo.DAO.Detalle_ProtesisDAO;
+import Modelo.DAO.DiagnosticoDAO;
+import Modelo.DAO.FacturaDAO;
+import Modelo.DAO.PacienteDAO;
+import Modelo.DAO.ServicioDAO;
+import Modelo.DAO.SolicitudProtesisDAO;
+import Modelo.VO.Detalle_DiagnosticoVO;
+import Modelo.VO.Detalle_FacturaVO;
+import Modelo.VO.Detalle_ProtesisVO;
+import Modelo.VO.DiagnosticoVO;
+import Modelo.VO.FacturaVO;
+import Modelo.VO.PacienteVO;
+import Modelo.VO.ServicioVO;
+import Modelo.VO.SolicitudProtesisVO;
+import Vista.ComponentCustomization;
+
+public class LogicaFactura {
+private CoordinadorFactura coordFactura;
+private ComponentCustomization custom = new ComponentCustomization();
+private FacturaDAO consultaFactura;
+private CRUD_DAO selectFactura;
+private Detalle_FacturaDAO consultaDetalle;
+private DiagnosticoDAO consultaDiagnostico;
+private Detalle_DiagnosticoDAO consultaDiagnosticoDetalle;
+private PacienteDAO consultaPaciente;
+private ServicioDAO consultaServicio;
+public void setCoordi(CoordinadorFactura coordFactura) {
+	this.coordFactura = coordFactura;
+}
+public boolean validarAddFactura(FacturaVO factura,ArrayList<Detalle_FacturaVO> listaDetalle) {
+boolean bool = false;
+consultaFactura = new FacturaDAO();
+consultaDetalle = new Detalle_FacturaDAO(); 
+selectFactura = new CRUD_DAO();
+consultaPaciente = new PacienteDAO();
+try {
+
+	if (listaDetalle.isEmpty()){
+		custom.msg("La factura debe de tener al menos 1 detalle", 7);
+	}else if (!(factura.getPaciente().getNombre().isEmpty())) {
+	if (validarDetalle(listaDetalle) == true) {	
+		if(custom.msgConfirm("Guardar factura?", 1) == JOptionPane.YES_OPTION){
+		bool = true;
+		consultaFactura.RealizarFactura(factura);
+		for (int i=0;i<listaDetalle.size();i++) {
+			consultaDetalle.RegistrarDetalleFactura(listaDetalle.get(i));}
+		}
+	
+	}}else {
+		custom.msg("", 1);
+		bool = false;
+	}
+	}catch (Exception e) {
+		custom.msg("", 1);
+		e.printStackTrace();
+	}
+return bool;}
+		
+public ArrayList<FacturaVO> validarListaFactura() throws SQLException{
+	consultaFactura = new FacturaDAO();
+	if(!consultaFactura.listafactura().isEmpty()) {
+		return consultaFactura.listafactura();}
+		else {
+			custom.msg("No existen Facturas", 7);
+			return null;
+}}
+public ArrayList<FacturaVO> validarFacturasPendientes() throws SQLException{
+	consultaFactura = new FacturaDAO();
+	if(!consultaFactura.facturasPendientes().isEmpty()) {
+		return consultaFactura.facturasPendientes();}
+		else {
+			custom.msg("No existen Facturas Pendientes", 7);
+			return null;
+}}
+public boolean validarDetalle(ArrayList<Detalle_FacturaVO> listaDetalle) {
+	boolean bool = false;
+
+	try {
+	for (int i = 0;i<listaDetalle.size();i++) {
+	if (!(listaDetalle.get(i).getCantidad() >= 0) ||  
+			(!(listaDetalle.get(i).getServicio().getIdServicio() >= 0))) {
+		custom.msg("", 1);
+		bool = false;;}
+	else {
+	bool = true;;
+			}}}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
+	return bool;}
+public ArrayList<ServicioVO> validarListaServicio() throws SQLException{
+	consultaServicio = new ServicioDAO();
+	return consultaServicio.listaServicio();
+}
+
+public ArrayList<Detalle_FacturaVO> validarListaDetalle(int id) throws SQLException{
+	consultaDetalle = new Detalle_FacturaDAO();
+	if(!consultaDetalle.listaDetalle(id).isEmpty()) {
+		return consultaDetalle.listaDetalle(id);}
+		else {
+			return null;
+}}
+
+public PacienteVO validarBuscarPaciente(int id) {
+	consultaPaciente = new PacienteDAO();
+	if(consultaPaciente.buscarPaciente(id).getNombre() == null ) {
+		custom.msg("Paciente", 2);
+		return null;
+	}else {	
+	return consultaPaciente.buscarPaciente(id);
+}	}
+public DiagnosticoVO validarBuscarDiagnostico(int id) {
+	consultaDiagnostico = new DiagnosticoDAO();
+	 if(!(consultaDiagnostico.buscarDiagnostico(id).getIdDiagnostico() > 0)) {
+		custom.msg("Diagnostico", 2);
+		return null;
+	}else {	
+	return consultaDiagnostico.buscarDiagnostico(id);
+}}
+public ArrayList<Detalle_DiagnosticoVO> validarDetalleDiagnostico(int id) throws SQLException{
+	consultaDiagnosticoDetalle = new Detalle_DiagnosticoDAO();
+	if(!consultaDiagnosticoDetalle.listaDetalle(id).isEmpty()) {
+		return consultaDiagnosticoDetalle.listaDetalle(id);}
+		else {
+			return null;
+}}
+
+
+}

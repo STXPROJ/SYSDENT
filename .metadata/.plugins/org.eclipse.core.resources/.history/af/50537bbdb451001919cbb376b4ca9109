@@ -1,0 +1,60 @@
+package Vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JDesktopPane;
+
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.Frame;
+import javax.swing.JInternalFrame;
+import java.awt.Color;
+import javax.swing.JSplitPane;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+public class Menu extends JFrame {
+	private JTextField textField;
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu frame = new Menu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Menu() {
+		setExtendedState(MAXIMIZED_BOTH);
+		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.WEST);
+		
+		textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JInternalFrame internalFrame = new JInternalFrame("New JInternalFrame");
+		internalFrame.setBorder(null);
+		getContentPane().add(internalFrame, BorderLayout.CENTER);
+		internalFrame.setVisible(true);
+		
+	}
+}

@@ -1,0 +1,417 @@
+package Vista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Enumeration;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import Modelo.VO.UsuarioVO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import net.miginfocom.swing.MigLayout;
+
+public class Menu extends JFrame {
+private JButton btnAgendaCita = new JButton();
+private JButton btnRealizaDiagnostico  = new JButton();
+private JButton btnPaciente = new JButton();
+private JButton btnSolicitud  = new JButton();
+private JButton btnFactura = new JButton();
+private JButton btnPago = new JButton();
+private JButton btnEmpleado = new JButton();
+private JButton btnUser = new JButton();
+private JButton btnLab = new JButton();
+private JButton btnServicio = new JButton();
+private JButton btnReportes = new JButton();
+private JButton btnCuentas = new JButton();
+private ComponentCustomization custom = new ComponentCustomization();
+private JLabel titulo = new JLabel();
+private  JLabel user;
+private UsuarioVO usuarioActivo;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Menu frame = new Menu();
+					frame.setVisible(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @throws IOException 
+	 * @throws FontFormatException 
+	 * @throws ParseException 
+	 */
+	public UsuarioVO getUsuarioActivo() {
+		return usuarioActivo;
+	}
+	public void setUsuarioActivo(UsuarioVO usuario) {
+		this.usuarioActivo = usuario;
+		if(!(getUsuarioActivo()== null)) {
+		user.setText(getUsuarioActivo().getNombre());}
+		else {
+			user.setText("");
+		}
+	}
+	public Menu() throws FontFormatException, IOException, ParseException  {
+		// Iniciar Menu
+			initMenu();
+		// Iniciar SubMenu
+			initSubMenu();
+		// iniciar ventana session
+			initSession();
+		// iniciar Ventana Display
+			initWindow();
+		// iniciar Botones
+			initButtons();
+	}
+	private void initMenu() throws FontFormatException, IOException {
+		getContentPane().setBackground(Color.BLACK);
+		setExtendedState(MAXIMIZED_BOTH);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		getContentPane().add(menu, BorderLayout.CENTER);
+		menu.setLayout(null);
+		menu.setBounds(0, 0, getContentPane().getWidth(), getContentPane().getHeight());
+		menu.setBackground(Color.black);
+		
+	}
+	private void initSubMenu() {
+		subMenu.setBounds(0,0,218,735);
+		subMenu.setBackground(subMenucolor);
+		subMenu.setLayout(new MigLayout("", "[209px]", "[45px][][][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px][39px:39px:39px]"));
+	  // Agregar al Frame Principal
+		menu.add(subMenu);
+
+		// Crear Imagen o icono y mostrar en pantalla
+		JLabel ico = new JLabel();
+		ico.setHorizontalAlignment(SwingConstants.CENTER);
+		ico.setIcon(userico);
+		/* Implementacion label usuario */
+		// Label Usuario
+		user = new JLabel();
+		user.setForeground(Color.WHITE);
+		user.setFont(new Font("Tahoma", Font.BOLD, 18));
+		user.setHorizontalAlignment(SwingConstants.CENTER);
+		user.setVerticalAlignment(SwingConstants.BOTTOM);
+		// Label line
+		JLabel line = new JLabel();
+		line.setHorizontalAlignment(SwingConstants.CENTER);
+		line.setIcon(lineico);
+		
+		subMenu.add(ico, "cell 0 0, grow");
+		subMenu.add(user, "cell 0 1, grow");
+		subMenu.add(line, "cell 0 2, grow");
+		subMenu.add(btnAgendaCita, "cell 0 4, grow");
+		group.add(btnAgendaCita);
+		subMenu.add(btnRealizaDiagnostico, "cell 0 5, grow");
+		group.add(btnRealizaDiagnostico);
+		subMenu.add(btnPaciente, "cell 0 6, grow");
+		group.add(btnPaciente);
+		subMenu.add(btnSolicitud, "cell 0 7, grow");
+		group.add(btnSolicitud);
+		subMenu.add(btnFactura, "cell 0 8, grow");
+		group.add(btnFactura);
+		subMenu.add(btnPago, "cell 0 9, grow");
+		group.add(btnPago);
+		subMenu.add(btnEmpleado, "cell 0 10, grow");
+		group.add(btnEmpleado);
+		subMenu.add(btnUser, "cell 0 11, grow");
+		group.add(btnUser);
+		subMenu.add(btnLab, "cell 0 12, grow");
+		group.add(btnLab);
+		subMenu.add(btnServicio, "cell 0 13, grow");
+		group.add(btnServicio);
+		subMenu.add(btnReportes, "cell 0 14, grow");
+		group.add(btnReportes);
+		subMenu.add(btnCuentas, "cell 0 15, grow");
+		group.add(btnCuentas);
+		
+	}
+	private void initSession() throws FontFormatException, IOException {
+		session.setBackground(new Color(100,100,100));
+		session.setBounds(210, 0, 1160,75 );
+		menu.add(session);
+		/* Implementacion Titulo y Cerrar Sesion*/
+		/* Titulo del Panel */
+		titulo.setBounds(200, 0, 1000, 70);
+		titulo.setBackground(Color.BLACK);
+		titulo.setForeground(Color.WHITE);
+		titulo.setFont(new Font("Lucida Bright", Font.PLAIN, 60));
+		// Boton Cerrar Sesion
+		custom.button(logoff, "Cerrar Sesion", "\uf2f5", "solid",2);
+		logoff.setBounds(950, 7, 200, 60);
+		//logoff.setMargin(new Insets(50, 50, 50, 50));
+		session.setLayout(null);
+		// Agregar Componentes a Session
+		session.add(titulo,BorderLayout.CENTER);
+		session.add(logoff);
+	}
+	private void initWindow() {
+		window.setBackground(windowColor);
+		window.setBounds(218, 76, 1160,630);
+		window.setLayout(null);
+		menu.add(window);
+
+	}
+	private void test(JButton btn) {
+		if (btn.isSelected()){
+			System.out.println("lk");
+			group.setSelected(btn.getModel(), false);
+		}
+	}
+	private void initButtons() throws FontFormatException, IOException {
+		// Boton Agendar Cita
+		custom.button(btnAgendaCita,"Agendar Cita","\uf274","regular",1);
+		 btnAgendaCita.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						test(btnAgendaCita);
+						irAgendaCita(window, titulo);
+						///buttonEnabled(true, btnAgendaCita);
+						
+					} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+						e1.printStackTrace();
+					}}});
+		// Boton Realizar Diagnostico
+		custom.button(btnRealizaDiagnostico, "Realizar Diagnostico", "\uf0f1","solid",1);
+		btnRealizaDiagnostico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irDiagnostico(window, titulo);
+					buttonEnabled(true, btnRealizaDiagnostico);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Nuevo PAciente
+		custom.button(btnPaciente,"Nuevo Paciente","\uf500","solid",1);
+		btnPaciente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irCrearPaciente(window,titulo);
+					buttonEnabled(true, btnPaciente);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});	
+		// Boton Solicitud Protesis
+		custom.button(btnSolicitud, "Solicitud Protesis", "\uf15c","regular",1);
+		btnSolicitud.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irSolicitud(window, titulo);
+					buttonEnabled(true, btnSolicitud);
+				} catch (FontFormatException | IOException | ParseException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+			
+					e1.printStackTrace();
+				}}});
+		// Boton Generar Factura
+		custom.button(btnFactura, "Generar Factura", "\uf571", "solid",1);
+		btnFactura.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irFactura(window, titulo);
+					buttonEnabled(true, btnFactura);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Realizar Pagos
+		custom.button(btnPago, "Realizar Pagos", "\uf0d6", "solid",1);
+		btnPago.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irPagos(window, titulo);
+					buttonEnabled(true, btnPago);
+				} catch (FontFormatException | IOException | ParseException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Nuevo Empleado
+		custom.button(btnEmpleado, "Nuevo Empleado", "\uf234", "solid",1);
+		btnEmpleado.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irAgregarEmpleado(window, titulo);
+					buttonEnabled(true, btnEmpleado);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Crear Ususario 
+		custom.button(btnUser,"Crear Usuario","\uf4ff","solid",1);
+		btnUser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irAgregarUsuario(window, titulo);
+					buttonEnabled(true, btnUser);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Nuevo Laboratoroio
+		custom.button(btnLab, "Nuevo Laboratorio", "\uf66f", "solid",1);
+		btnLab.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irAgregarLab(window, titulo);
+					buttonEnabled(true, btnLab);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Nuevo Servicio
+		custom.button(btnServicio, "Nuevo Servicio", "\uf5c9", "solid",1);
+		btnServicio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					irAgregarServicio(window, titulo);
+					buttonEnabled(true, btnServicio);
+				} catch (FontFormatException | IOException | ParseException | SQLException e1) {
+					e1.printStackTrace();
+				}}});
+		// Boton Generar Reportes
+		custom.button(btnReportes, "Generar Reportes", "\uf080", "solid",1);
+		btnReportes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				window.removeAll();
+				buttonEnabled(true, btnReportes);
+				}});
+		// Boton Cuentas
+		 custom.button(btnCuentas, "Cuentas CC-CP", "\uf570", "solid",1);
+			btnCuentas.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					window.removeAll();
+					buttonEnabled(true, btnCuentas);
+					}});		
+		//Boton Cerrar Sesion
+				logoff.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.exit(0);	
+					}});
+	}
+	private void irAgendaCita(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		CitaGUI cita = new CitaGUI();
+		
+		 cita.setBounds(0, 0, 1160, 630);
+		 titulo.setText(cita.title());
+	        showPanel(window, cita);
+	}
+	private void irCrearPaciente(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		PacienteGUI paciente = new PacienteGUI();
+		
+		 paciente.setBounds(0, 0, 1160, 630);
+		 titulo.setText(paciente.title());
+	        showPanel(window, paciente);
+	}
+	private void irAgregarServicio(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		ServicioGUI servicio = new ServicioGUI();
+		servicio.setBounds(0, 0, 1160, 630);
+		titulo.setText(servicio.title());
+	    showPanel(window, servicio);
+	}
+	private void irAgregarUsuario(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		UsuarioGUI usuario = new UsuarioGUI();
+		usuario.setBounds(0, 0, 1160, 630);
+		titulo.setText(usuario.title());
+	    showPanel(window, usuario);}
+	private void irAgregarLab(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		LaboratorioGUI lab = new LaboratorioGUI();
+		lab.setBounds(0, 0, 1160, 630);
+		titulo.setText(lab.title());
+	    showPanel(window, lab);
+	    }
+	private void irAgregarEmpleado(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		EmpleadoGUI empleado = new EmpleadoGUI();
+		empleado.setBounds(0, 0, 1160, 630);
+		titulo.setText(empleado.title());
+	    showPanel(window, empleado);
+	}
+	private void irPagos(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException {
+		PagosGUI pagos = new PagosGUI();
+		pagos.setBounds(0, 0, 1160, 630);
+		titulo.setText(pagos.title());
+	    showPanel(window, pagos);
+	}
+	private void irDiagnostico(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		DiagnosticoGUI diagnostico = new DiagnosticoGUI();
+		diagnostico.setBounds(0, 0, 1160, 630);
+		titulo.setText(diagnostico.title());
+	    showPanel(window, diagnostico);
+	}
+	private void irSolicitud(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		SolicitudGUI solicitud = new SolicitudGUI();
+		solicitud.setBounds(0, 0, 1160, 630);
+		titulo.setText(solicitud.title());
+	    showPanel(window, solicitud);
+	}
+	private void irFactura(JPanel window,JLabel titulo) throws FontFormatException, IOException, ParseException, SQLException {
+		FacturaGUI factura = new FacturaGUI();
+		factura.setBounds(0, 0, 1160, 630);
+		titulo.setText(factura.title());
+	    showPanel(window, factura);
+	}
+	private void showPanel(JPanel window, JPanel form) {
+        window.removeAll();
+        window.add(form, BorderLayout.CENTER);
+        window.revalidate();
+        window.repaint();
+	}
+	private void buttonEnabled(Boolean bool, JButton btn) {
+		/* btnAgendaCita.setEnabled(bool);
+		 btnRealizaDiagnostico.setEnabled(bool);
+		 btnPaciente.setEnabled(bool);
+		 btnSolicitud.setEnabled(bool);
+		 btnFactura.setEnabled(bool);
+		 btnPago.setEnabled(bool);
+		 btnEmpleado.setEnabled(bool);
+		 btnUser.setEnabled(bool);
+		 btnLab.setEnabled(bool);
+		 btnServicio.setEnabled(bool);
+		 btnReportes.setEnabled(bool);
+		 btnCuentas.setEnabled(bool);
+		 btn.setEnabled(false);*/
+		//btn.setFocusPainted(false);
+		//btn.setBorderPainted(false);
+		btn.setDisabledIcon(btn.getIcon());
+	}
+	
+	
+	/* Declaracion de Componentes Visuales */
+	JPanel menu = new JPanel();
+	Color subMenucolor = new Color(89, 173, 238);
+	JPanel subMenu = new JPanel();
+	ImageIcon userico = new ImageIcon(getClass().getResource("/user.png"));
+	ImageIcon lineico = new ImageIcon(getClass().getResource("/Line.png"));
+	JPanel session = new JPanel();
+	JButton logoff = new JButton();
+	JPanel window = new JPanel();
+	Color windowColor = (Color.WHITE);
+	ButtonGroup group = new ButtonGroup();
+	}

@@ -1,0 +1,16 @@
+AbstractTextEditor.Color.SelectionBackground=208,237,238
+AbstractTextEditor.Color.SelectionForeground=0,0,0
+PHPReadOccurrenceIndicationColor=0,0,0
+PHPWriteOccurrenceIndicationColor=0,0,0
+currentLineColor=91,90,78
+eclipse.preferences.version=1
+fullcoverage_stylePreferences=NONE
+fullcoverage_text=false
+javaScriptOccurrenceIndicationColor=0,0,0
+nocoverage_stylePreferences=NONE
+nocoverage_text=false
+org.eclipse.cdt.ui.occurrenceIndicationColor=0,0,0
+overviewRuler_migration=migrated_3.1
+partialcoverage_stylePreferences=NONE
+partialcoverage_text=false
+pydevOccurrenceIndicationColor=0,0,0
